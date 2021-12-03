@@ -16,6 +16,8 @@ import type { Quad } from '@rdfjs/types'
 const quad: Quad = isQuad(baseQuad /* An rdf-js compliant basequad */);
 ```
 
+This package also includes functions to check for
+
 ## License
 ©2021–present
 [Jesse Wright](https://github.com/jeswr),
