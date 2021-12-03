@@ -10,13 +10,63 @@ This package is used to check if an [rdf-js compliant](https://github.com/rdfjs/
 ## Usage
 
 ```ts
-import isQuad from 'is-quad'
-import type { Quad } from '@rdfjs/types'
+import isQuad from 'is-quad';
+import type { Quad } from '@rdfjs/types';
 
-const quad: Quad = isQuad(baseQuad /* An rdf-js compliant basequad */);
+const quad = isQuad(baseQuad /* An rdf-js compliant BaseQuad */);
 ```
 
-This package also includes functions to check for
+### Examples
+```ts
+import isQuad from 'is-quad';
+import { namedNode, blankNode } from '@rdfjs/data-model';
+import type { Quad, BaseQuad } from '@rdfjs/types';
+
+const goodQuad = quad(namedNode('s'), namedNode('p'), namedNode('o'));
+const badQuad = quad<BaseQuad>(namedNode('s'), blankNode('p'), namedNode('o'));
+
+isQuad(goodQuad); // true
+isQuad(badQuad);  // false
+```
+
+### Additional APIs
+
+This package also includes functions to check whether a `Term` is a valid `Quad_Subject`, `Quad_Predicate`, `Quad_Object`, `Quad_Graph` or `Quad`.
+
+```ts
+import {
+  termIsQuad, isGraph, isQuadSubject, isQuadPredicate, isQuadObject,
+} from 'is-quad';
+import { namedNode, blankNode, defaultGraph } from '@rdfjs/data-model';
+
+const goodQuad = quad(namedNode('s'), namedNode('p'), namedNode('o'));
+const badQuad = quad<BaseQuad>(namedNode('s'), blankNode('p'), namedNode('o'));
+
+termIsQuad(goodQuad); // true
+termIsQuad(namedNode('s')); // false
+termIsQuad(badQuad); // false
+
+isGraph(namedNode('s')) // true
+isGraph(defaultGraph()) // true
+isGraph(goodQuad) // false
+isGraph(badQuad) // false
+isGraph(literal('s')) // false
+
+isQuadSubject(goodQuad); // true
+isQuadSubject(namedNode('s')); // true
+isQuadSubject(badQuad); // false
+isQuadSubject(literal('s')); // false
+
+isQuadPredicate(goodQuad); // false
+isQuadPredicate(namedNode('s')); // true
+isQuadPredicate(badQuad); // false
+isQuadSubject(literal('s')); // false
+
+isQuadObject(goodQuad); // true
+isQuadObject(namedNode('s')); // true
+isQuadObject(badQuad); // false
+isQuadSubject(literal('s')); // true
+```
 
 ## License
 ©2021–present
