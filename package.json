@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "is-quad",
   "version": "0.0.0-development",
   "description": "",
   "main": "dist/index.js",
@@ -11,8 +11,6 @@
     "dist"
   ],
   "scripts": {
-    "test:coverage": "npm test -- --coverage",
-    "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "test": "jest",
     "lint": "eslint lib/* __tests__/* --ext .ts",
     "lint:fix": "eslint lib/* __tests__/* --ext .ts --fix",
@@ -22,17 +20,20 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/jeswr/is-quad"
   },
   "keywords": [],
   "author": "Jesse Wright <jesse.wright@anu.edu.au>",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/jeswr/is-quad/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/jeswr/is-quad#readme",
   "devDependencies": {
+    "@rdfjs/data-model": "^1.3.4",
+    "@rdfjs/types": "^1.0.1",
     "@types/jest": "^27.0.3",
+    "@types/rdf-data-model": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.3.0",
@@ -48,7 +49,7 @@
     "preset": "ts-jest",
     "collectCoverage": true,
     "coverageReporters": [
-      "json-summary", 
+      "json-summary",
       "text",
       "lcov"
     ],
