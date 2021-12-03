@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "is-quad",
   "version": "0.0.0-development",
   "description": "",
   "main": "dist/index.js",
@@ -11,8 +11,6 @@
     "dist"
   ],
   "scripts": {
-    "test:coverage": "npm test -- --coverage",
-    "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "test": "jest",
     "lint": "eslint lib/* __tests__/* --ext .ts",
     "lint:fix": "eslint lib/* __tests__/* --ext .ts --fix",
@@ -22,13 +20,13 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/jeswr/is-quad"
   },
   "keywords": [],
   "author": "Jesse Wright <jesse.wright@anu.edu.au>",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/jeswr/is-quad/issues"
   },
   "homepage": "",
   "devDependencies": {
