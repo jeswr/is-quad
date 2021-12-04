@@ -92,7 +92,6 @@ describe('termIsQuad checks', () => {
     expect(termIsQuad(NamedNodesQuad)).toBe(true);
     expect(termIsQuad(NestedQuads)).toBe(true);
     expect(termIsQuad(NestedQuadsWithGraph)).toBe(true);
-    expect(termIsQuad(NestedQuadsWithGraph)).toBe(true);
   });
 
   it('Should identify invalid quads', () => {
