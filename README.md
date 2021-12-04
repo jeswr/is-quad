@@ -1,5 +1,5 @@
 # is-quad
-This package is used to check if an [rdf-js compliant](https://github.com/rdfjs/types/) `BaseQuad` is a valid `Quad` type
+This package is used to check if an [rdf-js compliant](https://github.com/rdfjs/types/) `BaseQuad` is a valid `Quad` type.
 
 [![GitHub license](https://img.shields.io/github/license/jeswr/useState.svg)](https://github.com/jeswr/is-quad/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/is-quad.svg)](https://www.npmjs.com/package/is-quad)
@@ -9,18 +9,12 @@ This package is used to check if an [rdf-js compliant](https://github.com/rdfjs/
 
 ## Usage
 
-```ts
-import isQuad from 'is-quad';
-import type { Quad } from '@rdfjs/types';
+### Checking a `BaseQuad` is a `Quad`
 
-const quad = isQuad(baseQuad /* An rdf-js compliant BaseQuad */);
-```
-
-### Examples
 ```ts
 import isQuad from 'is-quad';
 import { namedNode, blankNode } from '@rdfjs/data-model';
-import type { Quad, BaseQuad } from '@rdfjs/types';
+import type { BaseQuad } from '@rdfjs/types';
 
 const goodQuad = quad(namedNode('s'), namedNode('p'), namedNode('o'));
 const badQuad = quad<BaseQuad>(namedNode('s'), blankNode('p'), namedNode('o'));
@@ -29,13 +23,31 @@ isQuad(goodQuad); // true
 isQuad(badQuad);  // false
 ```
 
+### Safely casting a `BaseQuad` as a `Quad`
+
+```ts
+import isQuad from 'is-quad';
+import { namedNode, blankNode } from '@rdfjs/data-model';
+import type { BaseQuad } from '@rdfjs/types';
+
+const goodQuad = quad(namedNode('s'), namedNode('p'), namedNode('o'));
+const badQuad = quad<BaseQuad>(namedNode('s'), blankNode('p'), namedNode('o'));
+
+isQuad(goodQuad); // true
+isQuad(badQuad);  // false
+
+const quad: Quad = asQuad(goodQuad);
+asQuad(badQuad) // Error is thrown
+```
+
 ### Additional APIs
 
-This package also includes functions to check whether a `Term` is a valid `Quad_Subject`, `Quad_Predicate`, `Quad_Object`, `Quad_Graph` or `Quad`.
+This package also includes functions to check whether a `Term` is a valid `Quad_Subject`, `Quad_Predicate`, `Quad_Object`, `Quad_Graph` or `Quad` - and likewise cast from terms to these tpyes
 
 ```ts
 import {
   termIsQuad, isGraph, isQuadSubject, isQuadPredicate, isQuadObject,
+  termAsQuad, asGraph, asQuadSubject, asQuadPredicate, asQuadObject,
 } from 'is-quad';
 import { namedNode, blankNode, defaultGraph } from '@rdfjs/data-model';
 
@@ -46,26 +58,55 @@ termIsQuad(goodQuad); // true
 termIsQuad(namedNode('s')); // false
 termIsQuad(badQuad); // false
 
+termAsQuad(goodQuad); // goodQuad: Quad
+termAsQuad(namedNode('s')); // Error
+termAsQuad(badQuad); // Error
+
+
 isGraph(namedNode('s')) // true
 isGraph(defaultGraph()) // true
 isGraph(goodQuad) // false
 isGraph(badQuad) // false
 isGraph(literal('s')) // false
 
+asGraph(namedNode('s')) // namedNode('s'): Quad_Graph
+asGraph(defaultGraph()) // defaultGraph(): Quad_Graph
+asGraph(goodQuad) // Error
+asGraph(badQuad) // Error
+asGraph(literal('s')) // Error
+
+
 isQuadSubject(goodQuad); // true
 isQuadSubject(namedNode('s')); // true
 isQuadSubject(badQuad); // false
 isQuadSubject(literal('s')); // false
 
+asQuadSubject(goodQuad); // goodQuad: Quad_Subject
+asQuadSubject(namedNode('s')); // namedNode('s'): Quad_Subject
+asQuadSubject(badQuad); // Error
+asQuadSubject(literal('s')); // Error
+
+
 isQuadPredicate(goodQuad); // false
-isQuadPredicate(namedNode('s')); // true
+isQuadPredicate(namedNode('p')); // true
 isQuadPredicate(badQuad); // false
-isQuadSubject(literal('s')); // false
+isQuadSubject(literal('p')); // false
+
+asQuadPredicate(goodQuad); // Error
+asQuadPredicate(namedNode('p')); // namedNode('p'): Quad_Predicate
+asQuadPredicate(badQuad); // Error
+asQuadSubject(literal('p')); // Error
+
 
 isQuadObject(goodQuad); // true
-isQuadObject(namedNode('s')); // true
+isQuadObject(namedNode('o')); // true
 isQuadObject(badQuad); // false
-isQuadSubject(literal('s')); // true
+isQuadSubject(literal('o')); // true
+
+asQuadObject(goodQuad); // goodQuad: Quad_Object
+asQuadObject(namedNode('o')); // namedNode('o'): Quad_Object
+asQuadObject(badQuad); // Error
+asQuadSubject(literal('o')); // literal('o'): Quad_Object
 ```
 
 ## License
