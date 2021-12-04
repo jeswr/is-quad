@@ -1,7 +1,7 @@
 {
   "name": "is-quad",
   "version": "0.0.0-development",
-  "description": "",
+  "description": "Checks if a BaseQuad is a valid RDF Quad",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "directories": {
@@ -22,7 +22,14 @@
     "type": "git",
     "url": "https://github.com/jeswr/is-quad"
   },
-  "keywords": [],
+  "keywords": [
+    "Quad",
+    "BaseQuad",
+    "isQuad",
+    "is-quad",
+    "RDF",
+    "utility"
+  ],
   "author": "Jesse Wright <jesse.wright@anu.edu.au>",
   "license": "MIT",
   "bugs": {
