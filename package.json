@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/jeswr/is-quad#readme",
   "devDependencies": {
-    "@rdfjs/data-model": "^1.3.4",
+    "@rdfjs/data-model": "^2.0.0",
     "@rdfjs/types": "^1.0.1",
     "@types/jest": "^27.0.3",
     "@types/rdf-data-model": "^1.0.3",
